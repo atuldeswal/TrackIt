@@ -54,7 +54,7 @@ def entry(request):
             })
             send_email_with_gmail_api(to_email=new_user.email, subject=mail_subject, message_text=message)
             
-            messages.info(request, 'Please verify your email address to complete the registrationn')
+            messages.info(request, 'Please verify your email address to complete the registration')
             return redirect('entry')
         
         # User login process
