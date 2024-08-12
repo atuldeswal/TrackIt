@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <p>Hi {{ User.firstname }},</p>
+    <p>Please click on the link to confirm your registration:</p>
+    <a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">Activate your account</a>
+
+</body>
+
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="/static/js/message.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+    /* PAGE CSS */
+    * {
+      padding: 0;
+      margin: 0;
+      /* box-sizing: border-box; */
+      font-family: outfit;
+    }
+
+    body {
+      /* background: #fff; */
+      background-image: url('/static/assets/bg-img2.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    #logo {
+      width: 79px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #131921;
+      padding: 20px 20px;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      min-width: 98%;
+    }
+
+    /* SEARCH BAR CSS */
+    .darksoul-search-bar {
+      width: 60px;
+      height: 60px;
+      margin: auto;
+      background-color: white;
+      display: flex;
+      border-radius: 0% 30px 30px 30px;
+      transition: width 0.7s;
+      position: fixed;
+      top: 42px;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search-icon {
+      margin-bottom: auto;
+      margin-top: auto;
+      margin-left: 5px;
+      margin-right: auto;
+      border-radius: 50%;
+      width: 50px;
+    }
+
+    .darksoul-search-bar:hover {
+      width: 400px;
+      border-radius: 0% 30px 30px 30px;
+    }
+
+    .darksoul-search-input {
+      margin: auto;
+      display: none;
+      /* transition: display 12s; */
+      outline: none;
+      border: none;
+      font-family: 'Belanosima', sans-serif;
+      border-radius: 25px;
+      padding-left: 10px;
+    }
+
+    .darksoul-search-bar:hover .darksoul-search-input {
+      display: inline-flex;
+      width: 78%;
+      height: 70%;
+    }
+
+    input[type="submit"] {
+      display: none;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .darksoul-search-bar:hover {
+        width: 80%;
+        border-radius: 0% 30px 30px 15px;
+      }
+    }
+
+    /* LOGOUT CSS */
+    .navigation {
+      background-color: black;
+    }
+
+    #lg_img {
+      width: 30px;
+      border-radius: 50px;
+      float: left;
+    }
+
+    .logout {
+      font-size: .8em;
+      font-family: 'Oswald', sans-serif;
+      position: relative;
+      right: -15px;
+      bottom: -4px;
+      overflow: hidden;
+      letter-spacing: 3px;
+      opacity: 0;
+      transition: opacity .45s;
+      -webkit-transition: opacity .35s;
+    }
+
+    .button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      float: right;
+      padding: 12px;
+      margin: 15px;
+      color: white;
+      width: 50px;
+      background-color: black;
+      transition: width .35s, background-color .35s;
+      /* Add transition for background-color if needed */
+      -webkit-transition: width .35s;
+      overflow: hidden;
+      font-family: inherit;
+      /* To maintain font consistency */
+      font-size: inherit;
+    }
+
+    .button:hover {
+      width: 140px;
+      /* Adjust if necessary to fit the text */
+    }
+
+    .button:hover .logout {
+      opacity: .9;
+    }
+
+    /* Ensure that the styles for a tags do not interfere */
+    a {
+      text-decoration: none;
+    }
+
+    /* Additional styles to ensure button does not have default styles */
+    .button:focus {
+      outline: none;
+    }
+
+    .button::-moz-focus-inner {
+      border: 0;
+    }
+
+
+    /* USER GREETING */
+    .user-greeting {
+      color: white;
+      position: relative;
+      margin-left: 1540px;
+    }
+
+    /* PRODUCT TABLE */
+    table {
+      width: 80%;
+      border-collapse: collapse;
+      margin-left: 80px;
+      margin-top: 150px;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: left;
+      height: 300px;
+      border: none;
+      border-bottom: 1px solid rgb(199, 199, 199);
+    }
+
+    td img {
+      width: 400px;
+      height: 300px;
+      object-fit: contain;
+      margin: auto;
+      background-color: #ebf7ff;
+    }
+
+    .c1 {
+      width: 400px;
+      height: 34px;
+    }
+
+    .c2 {
+      width: 600px;
+    }
+
+
+    .title {
+      font-size: 24px;
+      color: #333;
+      font-family: 'Arial', sans-serif;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .price {
+      margin-bottom: 10px;
+      width: 600px;
+    }
+
+    /* BUTTONS */
+    .buy-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #28a745;
+      background-color: transparent;
+      border: 1px solid #28a745;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      display: inline-block;
+      transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+      text-decoration: none;
+    }
+
+    .buy-button:hover,
+    .buy-button:focus {
+      color: #fff;
+      /* White text on hover/focus for contrast */
+      background-color: #28a745;
+      /* Green background on hover/focus */
+      border-color: #218838;
+      /* A slightly darker green border on hover/focus for depth */
+    }
+
+    .buy-button:focus {
+      outline: none;
+      /* Removes the outline to keep the style clean */
+      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+      /* A subtle glow effect for accessibility */
+    }
+
+
+    .remove-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+      outline: none;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      color: #dc3545;
+      /* Red text color for danger */
+      background-color: transparent;
+      border-color: #dc3545;
+    }
+
+    .remove-button:hover,
+    .remove-button:focus {
+      color: #fff;
+      /* White text on hover/focus */
+      background-color: #dc3545;
+      /* Red background on hover/focus */
+      border-color: #dc3545;
+      /* Red border color on hover/focus */
+    }
+
+    .remove-button:focus {
+      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+      /* Add a glow effect on focus */
+    }
+
+
+
+    /* ERROR MESSAGE CSS */
+    .message-dialogue {
+      position: fixed;
+      top: 3%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+    }
+
+    .message-dialogue {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      z-index: 1000;
+      transition: transform 0.3s ease-in-out;
+
+    }
+
+    .message-dialogue.show {
+      transform: translate(-50%, 0);
+    }
+
+
+    .message.info {
+
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .message.success {
+      background-color: #28a745;
+      color: #fff;
+    }
+
+    .message.warning {
+      background-color: #ffc107;
+      color: #000;
+    }
+
+    .message.error {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    .message.info,
+    .message.success,
+    .message.warning,
+    .message.error {
+      border-bottom-right-radius: 12px;
+      border-bottom-left-radius: 12px;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <!-- LOGO -->
+    <img id="logo" src="/static/assets/newlogo3.png" width="100" alt="">
+
+    <!-- SEARCH BAR -->
+    <form method="POST" name="add_product">
+      {% csrf_token %}
+      <div class="darksoul-search-bar">
+        <img class="search-icon" src="https://darksoul-codepen.github.io/search-icon.png" width="50" height="50" />
+        <input type="text" name="search" placeholder="Paste URL to start tracking" class="darksoul-search-input"
+          autocomplete="on" />
+      </div>
+    </form>
+
+    <!-- "HELLO USER" TEXT AND LOGOUT BUTTON -->
+    <div class="user-greeting">Hello {{ request.user.first_name }}</div>
+
+    <!-- LOGOUT BUTTON -->
+    <form method="POST">
+      {% csrf_token %}
+      <div class="navigation">
+        <!-- Use a button instead of an <a> tag and style it -->
+        <button type="submit" class="button" name="lg">
+          <img
+            src="https://pbs.twimg.com/profile_images/378800000639740507/fc0aaad744734cd1dbc8aeb3d51f8729_400x400.jpeg"
+            alt="Logout" id="lg_img">
+          <div class="logout">LOGOUT</div>
+        </button>
+      </div>
+    </form>
+  </nav>
+
+  <!-- ERROR MESSAGES -->
+  {% if messages %}
+  <div class="message-dialogue">
+    {% for message in messages %}
+    <div class="message {{ message.tags }}">
+      {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <script>
+    // Get the message dialogue element
+    var messageDialogue = document.querySelector('.message-dialogue');
+
+    // Check if the message dialogue exists
+    if (messageDialogue) {
+      // Show the message dialogue by adding the 'show' class
+      messageDialogue.classList.add('show');
+
+      // Hide the message dialogue after 3 seconds
+      setTimeout(function () {
+        messageDialogue.classList.remove('show');
+      }, 3000); // 3000 milliseconds = 3 seconds
+    }
+  </script>
+
+  <script>
+    let id = ["first"];
+  </script>
+
+  <!-- PRODUCT TABLE -->
+  <table>
+    <tbody>
+      {% for product in products_info.values %}
+      <tr>
+        <td class="c1"><img src="{{ product.product_image }}" alt="Product Image"></td>
+        <td class="c2">
+          <span class="title" style="display: inline-block;">{{ product.product_name }}</span>
+          <span class="price" style="display: inline-block;">₹{{ product.all_price|last }}</span>
+          <div class="two-buttons">
+            <a href="{{ product.product_url }}" target="_blank"><button type="button" class="buy-button">BUY
+                NOW</button></a>
+            <form action="" method="POST" style="display: inline;">
+              {% csrf_token %}
+              <input type="hidden" name="product_id" value="{{ product.product_id }}">
+              <button class="remove-button" type="submit" name="remove_product">REMOVE</button>
+            </form>
+          </div>
+        </td>
+        <td>
+          <canvas id="myChart-{{ product.product_id }}" style="width:700px;height: 100%; background-color: #e4f4ff;"
+            all_price="{{ product.all_price }}" all_dates="{{ product.all_dates }}"></canvas>
+          <script>
+            var a = "{{ product.product_id }}";
+            id.push(a)
+          </script>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- GRAPH JS -->
+  <script>
+    function createSimpleChart(chartElementId, xValues, yValues, maxYValue) {
+      new Chart(chartElementId, {
+        type: "line",
+        data: {
+          labels: xValues,
+          datasets: [{
+            data: yValues,
+            borderColor: "red",
+            fill: false
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                min: 0, // Set minimum value
+                max: maxYValue, // Use the maximum value passed as an argument
+              }
+            }]
+          },
+          legend: { display: false }
+        }
+      });
+    }
+    let allPrice, allDate;
+    for (var i = 1; i < id.length; i++) {
+      var a = 'myChart-' + id[i];
+      allPrice = document.getElementById(a).getAttribute('all_price');
+      allDate = document.getElementById(a).getAttribute('all_dates');
+
+
+      function convertDateStringToArray(inputStr) {
+        // Remove the leading and trailing square brackets and single quotes
+        const trimmedStr = inputStr.slice(2, -2);
+
+        // Split the string into an array using "', '" as a separator
+        const resultArray = trimmedStr.split("', '");
+
+        return resultArray;
+      }
+
+      function convertStringToIntArray(inputStr) {
+        // Assuming the input is a string that looks like an array of numbers.
+        // Trim the leading and trailing brackets
+        const trimmedStr = inputStr.trim().slice(1, -1);
+
+        // Split the string into an array using comma as a separator
+        const strArray = trimmedStr.split(',');
+
+        // Convert each element to an integer and return the new array
+        const intArray = strArray.map(s => parseInt(s.trim(), 10));
+
+        return intArray;
+      }
+
+
+      allDate = convertDateStringToArray(allDate);
+      allPrice = convertStringToIntArray(allPrice);
+
+
+      max = 1.50 * allPrice[1];
+      createSimpleChart(a, allDate, allPrice, max);
+
+    }
+  </script>
+
+
+</body>
+
+</html>
