@@ -139,7 +139,7 @@ TrackIt includes a background process that regularly checks for price changes ac
 
 ## 👨‍💻 Developer Information
 
-This project was developed as part of an MCA final semester project.
+This project was developed as part my MCA final semester project.
 
 ## 🔮 Future Enhancements
 
@@ -161,4 +161,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📞 Contact
 
-For any questions or suggestions, please reach out to [your-email@example.com](mailto:hunnydeswal2@gmail.com)
+For any questions or suggestions, please reach out to [hunnydeswal2@gmail.com](mailto:hunnydeswal2@gmail.com)
