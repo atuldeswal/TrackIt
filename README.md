@@ -159,6 +159,15 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+**Current Contributors:**
+- Atul Deswal – [hunnydeswal2@gmail.com](mailto:hunnydeswal2@gmail.com)
+- Suraj Singh – [suraj.your.email@example.com](mailto:suraj.your.email@example.com)
+
+Want to be listed here? Just make a meaningful contribution to the project!
+
 ## 📞 Contact
 
-For any questions or suggestions, please reach out to [hunnydeswal2@gmail.com](mailto:hunnydeswal2@gmail.com)
+For any questions or suggestions, please reach out to either of us:
+- Hunny Deswal – [hunnydeswal2@gmail.com](mailto:hunnydeswal2@gmail.com)
+- Suraj Singh – [suraj.your.email@example.com](mailto:ksurajsingh270@gmail.com)
+
