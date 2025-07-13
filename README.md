@@ -160,7 +160,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 5. Open a Pull Request
 
 **Current Contributors:**
-- Atul Deswal – [hunnydeswal2@gmail.com](mailto:hunnydeswal2@gmail.com)
 - Suraj Singh – [ksurajsingh270@gmail.com](mailto:ksurajsingh270@gmail.com)
 
 Want to be listed here? Just make a meaningful contribution to the project!
